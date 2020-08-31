@@ -12,39 +12,71 @@ def character_count(count):
 def revolver_selection(revolver_name):
     revolvers = ['.44 Magnum', 'Nagant M1895', '.357 Magnum']
     if revolver_name in revolvers:
-        print('Your revolver has been chosen.')
-        print('Your revolver is: ' + revolver_name + '.')
+        print('Your revolver has been chosen. Your revolver is: ' + revolver_name + '.')
         return revolver_name
     else:
-        print('That revolver doesn\'t exist.')
-        return
+        print('That revolver doesn\'t exist. Try the following - \'.44 Magnum\', \'Nagant M1895\', \'.357 Magnum\'')
+        return 
 
-# --- Allows you to pick from two time options (Day, Night) and two place options (Kitchen, Bar) --- #
-# --- Note: can i experiment with using a dictionary in this area, pass in a time or place use .get() function to find a value from a key called time (or day), and check it against it? --- #
-def storyline(time_in_day, place_in_game): 
-    if time_in_day == 'Day':
-        print('It is daytime. The sun is shining outside.')
-    elif time_in_day == 'Night':
-        print('It is nighttime. It is dark outside.')
-    else:
-        print('This time doesn\'t exist.')
 
-    if len(number_of_characters) == 1:
-        if place_in_game == 'Kitchen':
-            print('You are alone in the kitchen. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette.')
-        elif place_in_game == 'Bar':
-            print('You are alone in the back of the bar. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette.')
-    elif len(number_of_characters) != 1:
-        if place_in_game == 'Kitchen':
-            print('You are with your friends in the kitchen. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette with your friends.')
-        elif place_in_game == 'Bar':
-            print('You are with your friends in the back of the bar. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette with your friends.')
+# --- Sets a 'storyline' for the game, including the revolver you picked above. --- #
+def storyline(time_in_day, place_in_game):
+    lower_time_in_day = time_in_day.lower()
+    lower_place_in_game = place_in_game.lower()
 
-        
+    if len(list_of_characters) == 1:
+        if lower_time_in_day == 'day' and lower_place_in_game == 'kitchen':
+            try:
+                print('It is daytime. The sun is shining outside. It is a pleasant and warm day with a small, fresh breeze.\nYou are alone in the kitchen. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette.')
+            except TypeError:
+                print('You entered an invalid revolver!')
+        elif lower_time_in_day == 'day' and lower_place_in_game == 'bar':
+            try:
+                print('It is daytime. The sun is shining outside. It is a pleasant and warm day with a small, fresh breeze.\nYou are alone in the back of the bar. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette.')
+            except TypeError:
+                print('You entered an invalid revolver!')
+        elif lower_time_in_day == 'night' and lower_place_in_game == 'kitchen':
+            try:
+                print('It is nighttime. It is dark outside. The roads are lit up with street lights.\nYou are alone in the kitchen. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette.')
+            except TypeError:
+                print('You entered an invalid revolver!')
+        elif lower_time_in_day == 'night' and lower_place_in_game == 'bar':
+            try:
+                print('It is nighttime. It is dark outside. The roads are lit up with street lights.\nYou are alone in the back of the bar. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette.')
+            except TypeError:
+                print('You entered an invalid revolver!')
+        else:
+            print('Something went wrong. The options available for time are \'day\' and \'night\' and the options available for place are \'kitchen\' and \'bar\'. Try again!')
+            
+    elif len(list_of_characters) > 1:
+        if lower_time_in_day == 'day' and lower_place_in_game == 'kitchen':
+            try:
+                print('It is daytime. The sun is shining outside. It is a pleasant and warm day with a small, fresh breeze.\nYou are with your friends in the kitchen. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette with your friends.')
+            except TypeError:
+                print('You entered an invalid revolver!')
+        elif lower_time_in_day == 'day' and lower_place_in_game == 'bar':
+            try:
+                print('It is daytime. The sun is shining outside. It is a pleasant and warm day with a small, fresh breeze.\nYou are with your friends in the back of the bar. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette with your friends.')
+            except TypeError:
+                print('You entered an invalid revolver!')
+        elif lower_time_in_day == 'night' and lower_place_in_game == 'kitchen':
+            try:
+                print('It is nighttime. It is dark outside. The roads are lit up with street lights.\nYou are with your friends in the kitchen. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette with your friends.')
+            except TypeError:
+                print('You entered an invalid revolver!')
+        elif lower_time_in_day == 'night' and lower_place_in_game == 'bar':
+            try:
+                print('It is nighttime. It is dark outside. The roads are lit up with street lights.\nYou are with your friends in the back of the bar. You take out your ' + revolver_choice + '. You decided to play some Russian Roulette with your friends.')
+            except TypeError:
+                print('You entered an invalid revolver!')
+        else:
+            print('Something went wrong. The options available for time are \'day\' and \'night\' and the options available for place are \'kitchen\' and \'bar\'. Try again!')
 
-number_of_characters = character_count(1)
-#print(number_of_characters)
-revolver_choice = revolver_selection('.44 Magnum')
+
+
+list_of_characters = character_count(1)
+#print(list_of_characters)
+revolver_choice = revolver_selection('MP412')
 #print(revolver_choice)
-storyline('Night', 'Bar')
-    
+storyline('day', 'kitchen')
+

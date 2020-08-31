@@ -1,6 +1,6 @@
 Russian Roulette - Notes
 
-1. create a function that returns the number of players playing - this will be called 'character count'
+1. create a function that returns a list of the players playing - this will be called 'character count'
 
 2. create a gun selection function (it wont contribue anything to the game, but its justs for vanity)
 
@@ -12,11 +12,11 @@ Russian Roulette - Notes
 
 	i. use randint to generate a number from 1-6. this number will be saved to the variable 'bullet'
 
-	ii. iterate through all the characters playing, by taking in the number player, like player 1, player 2, player 3, player 4 etc.
+	ii. iterate through all the characters playing, by taking in the character's name in the list of characters, like player 1, player 2, player 3, player 4 etc.
 
 	iii. the player will 'spin the revolver and fire'. randint will come into effect, from 1 to 6. if the number is equal to bullet, the character is dead
 
-		a. if the character dies, decrement 1 from the character count.
+		a. if the character dies, remove this character from the list of characters.
 
 		b. say that the character is dead.
 	
