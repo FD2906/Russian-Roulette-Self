@@ -1,14 +1,21 @@
-from random import randint
+import random
 
 # --- Creates a list of player, depending on the amount of players entered --- #
-def player_list(players):
+def player_list(players_count):
     players = []
-    for number in range(1, players + 1):
+    for number in range(1, players_count + 1):
         player_name = 'Player ' + str(number)
         players.append(player_name)
     return players
 
-# --- Allows you to pick from a list of revolvers, which will be used in the storyline. --- #
+
+# --- An alternative list can be called here, if people are playing this game and they want to choose their own names. --- #
+# --- Enter names here and uncomment this line, and comment/cut the above function. --- #
+
+# list_of_players = ['Frank']
+
+
+# --- Allows you to pick from a list of revolvers, which will be used in the storyline and the game --- #
 def revolver_selection(revolver_name):
     revolvers = ['.44 Magnum', 'Nagant M1895', '.357 Magnum']
     if revolver_name in revolvers:
@@ -73,12 +80,52 @@ def storyline(time_in_day, place_in_game):
             print('Something went wrong. The options available for time are \'day\' and \'night\' and the options available for place are \'kitchen\' and \'bar\'. Try again!')
 
 
+# --- The main game function, takes in a list of players, the choice of revolver, and the number of rounds to be played (one round is all of the players firing once). --- #
+def russian_roulette(list_of_players, revolver_choice, num_of_rounds):
+    number_of_players_remaining = len(list_of_players)
+    rounds_to_be_played = 0
+
+    try:
+        while number_of_players_remaining != 0 and rounds_to_be_played < len(list_of_players) * num_of_rounds:
+            for player in list_of_players:
+                bullet_in_cylinder = random.randint(1, 6)
+                print('\n' + player + ' takes the ' + revolver_choice + ', spins the cylinder, and takes aim.')
+                if bullet_in_cylinder != 1:
+                    print('The gun goes off, but doesn\'t kill ' + player + '. ' + player + ' survives to live another day.\n')
+                    rounds_to_be_played += 1
+                else:
+                    print('The gun kills ' + player + '. ' + player + ' is dead.\n')
+                    list_of_players.remove(player)
+                    rounds_to_be_played += 1
+
+        surviving_players = ''
+        temp_counter = 0
+        for player in list_of_players:
+            surviving_players = surviving_players + player
+            temp_counter += 1
+            if temp_counter == len(list_of_players):
+                surviving_players += '.'
+            else:
+                surviving_players += ', '
+
+        print('At the end of the game, the players that survived are: ' + surviving_players)
+    except TypeError:
+        print('Because a revolver was not chosen, the game doesn\'t work. Just like real life, you can\'t play Russian Roulette without a gun, right?')
 
 
 
+
+# Chooses how many players you want to play in the game.
 list_of_players = player_list(4)
-#print(list_of_characters)
+# Or if a list of names was entered, comment the above line.
+
+# Selects which revolver you want to use; pick from the three options: '.44 Magnum', '.357 Magnum', 'Nagant M1895'
 revolver_choice = revolver_selection('.44 Magnum')
 #print(revolver_choice)
+
+# Sets a storyline for the game. Pick a choice out of two times - 'day' or 'night', and place - 'kitchen' or 'bar'
 storyline('day', 'kitchen')
+
+# Starts the game. The final argument lets you select how many rounds you want to play.
+russian_roulette(list_of_players, revolver_choice, 2)
 
