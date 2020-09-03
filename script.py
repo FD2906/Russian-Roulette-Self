@@ -83,10 +83,11 @@ def storyline(time_in_day, place_in_game):
 # --- The main game function, takes in a list of players, the choice of revolver, and the number of rounds to be played (one round is all of the players firing once). --- #
 def russian_roulette(list_of_players, revolver_choice, num_of_rounds):
     number_of_players_remaining = len(list_of_players)
+    total_rounds = len(list_of_players) * num_of_rounds
     rounds_to_be_played = 0
 
     try:
-        while number_of_players_remaining != 0 and rounds_to_be_played < len(list_of_players) * num_of_rounds:
+        while number_of_players_remaining != 0 and rounds_to_be_played < total_rounds:
             for player in list_of_players:
                 bullet_in_cylinder = random.randint(1, 6)
                 print('\n' + player + ' takes the ' + revolver_choice + ', spins the cylinder, and takes aim.')
